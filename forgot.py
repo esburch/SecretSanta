@@ -3,11 +3,9 @@ from twilio.rest import TwilioRestClient
 
 from boto import dynamodb2
 from boto.dynamodb2.table import Table
- 
+
 # Your Account Sid and Auth Token from twilio.com/user/account
-account_sid = "AC8d88c63d2ed802cb766a9758108c1730"
-auth_token  = "7f271f2c0b100db2a8b15c22ebc4b82c"
-client = TwilioRestClient(account_sid, auth_token)
+client = TwilioRestClient()
 
 matches=[]
 elves=[]
@@ -15,11 +13,7 @@ elves=[]
 TABLE_NAME = "santas"
 REGION = "us-east-1"
 
-conn = dynamodb2.connect_to_region(
-    REGION,
-    aws_access_key_id='AKIAJVV3FHO6VYOWELYQ',
-    aws_secret_access_key='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'
-)
+conn = dynamodb2.connect_to_region(REGION)
 all_santas = Table(
     TABLE_NAME,
     connection=conn
@@ -60,4 +54,3 @@ for key in santas:
 		phone=elf['phone']
 		string=key + ' matched with ' + match + ' text ' + phone
 		print string
-

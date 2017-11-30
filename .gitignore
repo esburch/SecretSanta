@@ -48,3 +48,10 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# Python things
+boto
+twilio
+forgot.py
+six.py
+six.pyc
