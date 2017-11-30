@@ -51,7 +51,7 @@ def sendTexts():
             textMessage='Hi ' + key + '! Your match is ' + match + u". Gifts should be around $25. Merry Christmas! \U0001F384 \U0001F381"
             message = client.messages.create(body=textMessage,
                         to=phone,    # Replace with your phone number
-                   from_='+18605165159') # Replace with your Twilio number
+                   from_=fromPhone) # Replace with your Twilio number
             print message
             print 'Text Sent.'
 
