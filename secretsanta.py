@@ -18,7 +18,7 @@ client = Client()
 matches=[]
 elves=[]
 
-TABLE_NAME = 'santas_test'
+TABLE_NAME = 'santas'
 REGION = 'us-east-1'
 
 conn = dynamodb2.connect_to_region(REGION)
@@ -53,6 +53,7 @@ def sendTexts():
                         to=phone,    # Replace with your phone number
                    from_='+18605165159') # Replace with your Twilio number
             print message
+            print 'Text Sent.'
 
 def assignMatches():
     for key in santas:
@@ -64,22 +65,23 @@ def assignMatches():
             if key in elves:
                 elves.remove(key)
             elf_family=elf['family']
-            print 'Family: ' + elf_family
+            #print 'Family: ' + elf_family
             match=random.choice(elves)
             match_item=all_santas.get_item(name=match)
             match_family=match_item['family']
-            print 'Match Family: ' + match_family
+            #print 'Match Family: ' + match_family
             attempt = 0
             if attempt < 5:
               while elf_family == match_family:
                 match=random.choice(elves)
                 match_item=all_santas.get_item(name=match)
                 match_family=match_item['family']
-                print 'New Match Family: ' + match_family
+                #print 'New Match Family: ' + match_family
               attempt+=1
             matches.remove(match)
             elf['match']=match
             elf.save()
+            print 'Match Assigned.'
 
 accepted_strings = {'assign', 'send'}
 
